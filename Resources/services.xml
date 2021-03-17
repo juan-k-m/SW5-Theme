@@ -1,0 +1,22 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="jk_theme.subscriber.templates" class="JkTheme\Subscriber\ExtendTheme">
+            <argument>%jk_theme.plugin_dir%</argument>
+             <argument type="service" id="template"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <service id="jk_theme.subscriber.events_register" class="JkTheme\Subscriber\EventsRegister">
+            <argument>%jk_theme.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+        <service id="jk_theme.services.helper" class="JkTheme\Services\BackendHelper"/>
+        <service id="jk_theme.models.repository" class="JkTheme\Models\Repository"/>
+        <service id="jk_theme.services.config_reader" class="JkTheme\Services\ConfigReader" />
+
+    </services>
+
+</container>
