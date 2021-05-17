@@ -33,5 +33,3 @@ php bin/console sw:cache:clear
 
 
 ```
-
-3) Demo website https://sw5.juank.de/
