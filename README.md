@@ -21,7 +21,7 @@ not available
 1.) go to your shop root directory go to -> plugins directory and there create a new folder named 'JkTheme'and run in the command line:
 
 ```
-git clone https://github.com/juan-k-m/SW5-Theme.git
+git clone https://github.com/juan-k-m/SW5-Theme.git .
 
 ```
 
