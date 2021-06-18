@@ -21,13 +21,13 @@ namespace JkTheme\Subscriber;
 
 
 use Enlight\Event\SubscriberInterface;
-use Shopware\Components\Plugin\DBALConfigReader;
+use JkTheme\Services\ConfigReader;
 
 class EventsRegister implements SubscriberInterface
 {
 
     /**
-     * @var DBALConfigReader
+     * @var ConfigReader
      */
     private $configReader;
 
@@ -37,10 +37,10 @@ class EventsRegister implements SubscriberInterface
     private $pluginName;
 
     /**
-     * @param DBALConfigReader $configReader
+     * @param ConfigReader $configReader
      * @param $pluginName
      */
-    public function __construct(DBALConfigReader $configReader, $pluginName)
+    public function __construct(ConfigReader $configReader, $pluginName)
     {
         $this->configReader = $configReader;
         $this->pluginName = $pluginName;
@@ -67,19 +67,14 @@ class EventsRegister implements SubscriberInterface
     public function onFrontend(\Enlight_Event_EventArgs $args)
     {
       /** @var \Shopware_Controllers_Frontend_Detail $subject */
-      $subject = $args->get('subject');
-      $config = $this->configReader->getByPluginName($this->pluginName);
-        var_dump($config);exit;
-        $subject  = $args->getSubject();
+        $subject = $args->get('subject');
         $view     = $subject->View();
-        $customer = Shopware()->Modules()->Admin();
 
-        $configHelper = Shopware()->Container()->get('jk_theme.services.config_reader');
 
         //get the current shop and theme
         $shopId = Shopware()->Shop()->getId();
         $themeId = Shopware()->Shop()->getTemplate();
-        $themeConfiguration = $configHelper->readThemeConfig($shopId,$themeId);
+        $themeConfiguration = $this->configReader->readThemeConfig($shopId,$themeId);
         $themeConfiguration = $themeConfiguration[0];
 
 

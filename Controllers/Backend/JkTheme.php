@@ -21,23 +21,36 @@
 /**
 * Backend controllers extending from Shopware_Controllers_Backend_Application do support the new backend components
 */
+use JkTheme\Services\BackendHelper;
+
 class Shopware_Controllers_Backend_JkTheme extends Shopware_Controllers_Backend_ExtJs
 {
   protected $model = Theme::class;
 
   protected $alias = 'theme';
 
+
+    public function getWhitelistedCSRFActions()
+    {
+        return [
+            'update',
+            'read'
+        ];
+    }
+
   /**
-   * Endpoint to receive the reuests from the backend configuration theme form
+   * Endpoint to receive the requests from the backend configuration theme form
    */
   public function readAction(){
+    $repository = Shopware()->Models()->getRepository(JkTheme\Models\Theme::class);
     $result = [];
 
     $shopId = $this->request()->getParam('shopId');
     $themeId = $this->request()->getParam('themeId');
+    $result = $repository->loadRowWithShopIdAndThemeId($shopId,$themeId);
     try {
 
-      $result = $this->getRepository()->loadRowWithShopIdAndThemeId($shopId,$themeId);
+      
 
     } catch (\Exception $error) {
     }
@@ -79,9 +92,11 @@ class Shopware_Controllers_Backend_JkTheme extends Shopware_Controllers_Backend_
     $themeId = $this->request()->getParam('theme');
     $existConfig = [];
     //get helper
-
+// var_dump($themeId);
+// var_dump($this->request());exit;
+    $helper = $this->getBackendHelper();
     try {
-      $helper = $this->getBackendHelper();
+      //$helper = $this->getBackendHelper();
 
       $resquestData = $this->request();
       $resquestData = $helper->prepareData($resquestData);
@@ -120,7 +135,7 @@ class Shopware_Controllers_Backend_JkTheme extends Shopware_Controllers_Backend_
 
   private function getBackendHelper(){
 
-    return Shopware()->Container()->get('jk_theme.services.helper');
+    return new BackendHelper();
 
   }
 

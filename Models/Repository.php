@@ -71,7 +71,6 @@ class Repository extends ModelRepository
      * @return array results
      */
     public function loadRowWithShopIdAndThemeId($shopId, $themeId){
-
         $builder = $this->getEntityManager()->createQueryBuilder();
         return $builder->select('themeJk')
         ->from(Theme::class, 'themeJk')

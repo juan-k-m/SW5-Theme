@@ -61,7 +61,7 @@ class BackendHelper{
         $set = 'set'.ucfirst($key);
         $theme->$set($value);
       }
-
+      
       Shopware()->Models()->persist($theme);
       Shopware()->Models()->flush();
 
