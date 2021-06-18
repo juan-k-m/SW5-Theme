@@ -1,4 +1,5 @@
 <?php
+
 namespace JkTheme\Services;
 /**
 *   Shopware Theme - Simple Shopware theme with backend configurations options

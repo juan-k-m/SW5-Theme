@@ -21,9 +21,30 @@ namespace JkTheme\Subscriber;
 
 
 use Enlight\Event\SubscriberInterface;
+use Shopware\Components\Plugin\DBALConfigReader;
 
 class EventsRegister implements SubscriberInterface
 {
+
+    /**
+     * @var DBALConfigReader
+     */
+    private $configReader;
+
+    /**
+     * @var string
+     */
+    private $pluginName;
+
+    /**
+     * @param DBALConfigReader $configReader
+     * @param $pluginName
+     */
+    public function __construct(DBALConfigReader $configReader, $pluginName)
+    {
+        $this->configReader = $configReader;
+        $this->pluginName = $pluginName;
+    }
 
     public static function getSubscribedEvents()
     {
@@ -38,13 +59,17 @@ class EventsRegister implements SubscriberInterface
     /**
      * The Html elements classes are here set in order to
      * make the css changes. The configuration for the current
-     * shop and theme are called to check which configurations have been set
+     * shop and theme are called to check which configurations 
+     * have been set
      *
      *
      */
     public function onFrontend(\Enlight_Event_EventArgs $args)
     {
-
+      /** @var \Shopware_Controllers_Frontend_Detail $subject */
+      $subject = $args->get('subject');
+      $config = $this->configReader->getByPluginName($this->pluginName);
+        var_dump($config);exit;
         $subject  = $args->getSubject();
         $view     = $subject->View();
         $customer = Shopware()->Modules()->Admin();
