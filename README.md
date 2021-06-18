@@ -2,6 +2,7 @@
 (THE PLUGIN IS UNDER DEVELOPMENT AND SHOULD NOT BE USED IN PRODUCTION)
 
 
+
 - **License**: GPL-3.0
 - **Gitea**: https://github.com/juan-k-m/SW5-Theme.git
 
@@ -18,10 +19,10 @@ The repository contains just 'master' branch
 not available
 
 ### Installation via Git
-1.) go to your shop root directory go to -> plugins directory and there create a new folder named 'JkTheme'and run in the command line:
+1.) go to your shop root directory, then go to -> plugins directory and there create a new folder named 'JkTheme'and run in the command line:
 
 ```
-git clone https://github.com/juan-k-m/SW5-Theme.git
+git clone https://github.com/juan-k-m/SW5-Theme.git .
 
 ```
 
